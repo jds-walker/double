@@ -1,0 +1,58 @@
+{
+    "identityPoolName": "double3e9a859a_identitypool_3e9a859a",
+    "allowUnauthenticatedIdentities": false,
+    "resourceNameTruncated": "double3e9a859a",
+    "userPoolName": "double3e9a859a_userpool_3e9a859a",
+    "autoVerifiedAttributes": [
+        "email"
+    ],
+    "mfaConfiguration": "OFF",
+    "mfaTypes": [
+        "SMS Text Message"
+    ],
+    "smsAuthenticationMessage": "Your authentication code is {####}",
+    "smsVerificationMessage": "Your verification code is {####}",
+    "emailVerificationSubject": "Your verification code",
+    "emailVerificationMessage": "Your verification code is {####}",
+    "defaultPasswordPolicy": false,
+    "passwordPolicyMinLength": 8,
+    "passwordPolicyCharacters": [],
+    "requiredAttributes": [
+        "email"
+    ],
+    "userpoolClientGenerateSecret": true,
+    "userpoolClientRefreshTokenValidity": 30,
+    "userpoolClientWriteAttributes": [
+        "email"
+    ],
+    "userpoolClientReadAttributes": [
+        "email"
+    ],
+    "userpoolClientLambdaRole": "double3e9a859a_userpoolclient_lambda_role",
+    "userpoolClientSetAttributes": false,
+    "resourceName": "double3e9a859a",
+    "authSelections": "identityPoolAndUserPool",
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    },
+    "unauthRoleArn": {
+        "Fn::GetAtt": [
+            "UnauthRole",
+            "Arn"
+        ]
+    },
+    "useDefault": "defaultSocial",
+    "hostedUI": true,
+    "usernameAttributes": [
+        "email"
+    ],
+    "hostedUIDomainName": "double3e9a859a-3e9a859a",
+    "authProvidersUserPool": [],
+    "hostedUIProviderMeta": "[]",
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/callback/\"],\"LogoutURLs\":[\"http://localhost:3000/signout/\"]}",
+    "userPoolGroupList": [],
+    "dependsOn": []
+}

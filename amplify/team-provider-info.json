@@ -10,6 +10,13 @@
             "StackName": "amplify-double-amplify-80617",
             "StackId": "arn:aws:cloudformation:ap-southeast-2:821377504967:stack/amplify-double-amplify-80617/276ea8e0-63dc-11ea-90d6-06bee07abda0",
             "AmplifyAppId": "d11mlqgc2fi5id"
+        },
+        "categories": {
+            "auth": {
+                "double3e9a859a": {
+                    "hostedUIProviderCreds": "[]"
+                }
+            }
         }
     }
 }

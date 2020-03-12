@@ -1,31 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 import Amplify, { Auth } from 'aws-amplify';
-// import { Auth } from 'aws-amplify-react';
 import awsconfig from './aws-exports';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { Button } from '@material-ui/core'
+import Navbar from './components/navbar/Navbar'
 
 Amplify.configure(awsconfig);
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <React.Fragment>
+    <CssBaseline />
+      <div className="App">
+      <Navbar/>
+        <Button 
+          variant="contained" 
+          color="primary" 
+          onClick={() => Auth.federatedSignIn()}
         >
-          Learn React
-        </a>
-      </header>
-      <button onClick={() => Auth.federatedSignIn()}>Open Hosted UI</button>
-    </div>
+            Open Hosted UI
+        </Button>
+      </div>
+    </React.Fragment>
   );
 }
 

@@ -2,25 +2,23 @@ import React, { useState, useEffect } from 'react';
 import Amplify, { Auth } from 'aws-amplify';
 import awsconfig from './aws-exports';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { Button } from '@material-ui/core'
 import Navbar from './components/navbar/Navbar'
 import { Hub } from 'aws-amplify';
 
 Amplify.configure(awsconfig);
 
 function App() {
-  const [user, setUser] = useState("")
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
-
     const listener = (data) => {
-      console.log(data)
       if (data.payload.event === "signOut"){
-        setUser("");      
+        setUser(null);      
       }
-      setUser(data.payload.data.username)
+      Auth.currentUserInfo().then((data) => {
+        if (data != null) {setUser(data.username)}
+      })
     }
-    
     Hub.listen('auth', listener);
   })
 
@@ -28,15 +26,7 @@ function App() {
     <React.Fragment>
     <CssBaseline />
       <div className="App">
-
-      <Navbar/>
-        <Button 
-          variant="contained" 
-          color="primary" 
-          onClick={() => Auth.federatedSignIn()}
-        >
-            Open Hosted UI
-        </Button>
+      <Navbar user={user}/>
         <h1>Hello {user}</h1>
       </div>
       

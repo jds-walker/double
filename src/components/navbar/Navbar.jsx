@@ -5,8 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import SimpleMenu from '../simple-menu/SimpleMenu';
-import MenuIcon from '@material-ui/icons/Menu';
-import IconButton from '@material-ui/core/IconButton';
+import { Auth } from 'aws-amplify'
 
 
 const useStyles = makeStyles(theme => ({
@@ -21,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Navbar() {
+export default function Navbar({user}) {
   const classes = useStyles();
 
   return (
@@ -32,7 +31,11 @@ export default function Navbar() {
           <Typography variant="h6" className={classes.title}>
             Double
           </Typography>
-          <Button color="inherit">Login</Button>
+          {
+          console.log(user)}
+          {(user === null) ?
+          <Button color="inherit" onClick={() => Auth.federatedSignIn()}>Login</Button>
+        : <Button color="inherit" onClick={() => Auth.signOut()}>Logout</Button>}
         </Toolbar>
       </AppBar>
     </div>

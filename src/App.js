@@ -20,6 +20,11 @@ function App() {
       })
     }
     Hub.listen('auth', listener);
+
+    Auth.currentUserInfo().then((data) => {
+      if (data != null) {setUser(data.username)}
+    })
+
   })
 
   return (
@@ -28,10 +33,12 @@ function App() {
       <div className="App">
       <Navbar user={user}/>
         <h1>Hello {user}</h1>
+        
+
       </div>
       
     </React.Fragment>
   );
 }
 
-export default App;
+export default App

@@ -129,9 +129,9 @@
 					"hostedUIDomainName": "double3e9a859a-3e9a859a",
 					"authProvidersUserPool": "",
 					"hostedUIProviderMeta": "[]",
-					"oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/callback/\"],\"LogoutURLs\":[\"http://localhost:3000/signout/\"]}",
 					"userPoolGroupList": "",
 					"dependsOn": "",
+					"oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/\",\"http://localhost:3000/\"],\"LogoutURLs\":[\"http://localhost:3000/\"]}",
 					"hostedUIProviderCreds": "[]",
 					"env": "amplify"
 				}

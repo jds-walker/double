@@ -32,10 +32,10 @@ export default function Navbar({user}) {
             Double
           </Typography>
           {
-          console.log(user)}
-          {(user === null) ?
-          <Button color="inherit" onClick={() => Auth.federatedSignIn()}>Login</Button>
-        : <Button color="inherit" onClick={() => Auth.signOut()}>Logout</Button>}
+            (user === null) ?
+            <Button color="inherit" onClick={() => Auth.federatedSignIn()}>Login</Button> :
+            <Button color="inherit" onClick={() => Auth.signOut()}>Logout</Button>
+          }
         </Toolbar>
       </AppBar>
     </div>

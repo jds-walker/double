@@ -4,10 +4,15 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuIcon from '@material-ui/icons/Menu';
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   menuButton: {
     marginRight: theme.spacing(2),
+  },
+  link: {
+    textDecoration: 'none',
+    color: 'black',
   }
 }));
 
@@ -42,9 +47,15 @@ export default function SimpleMenu() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <Link className={classes.link} to="/profile">
+          <MenuItem onClick={handleClose}>Profile</MenuItem>
+        </Link>
+        <Link className={classes.link} to="/account">
+          <MenuItem onClick={handleClose}>Account</MenuItem>
+        </Link>
+        <Link className={classes.link} to="/">
+          <MenuItem onClick={handleClose}>Home</MenuItem>
+        </Link>
       </Menu>
     </div>
   );

@@ -4,8 +4,25 @@ import awsconfig from './aws-exports';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Navbar from './components/navbar/Navbar'
 import { Hub } from 'aws-amplify';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 
 Amplify.configure(awsconfig);
+
+function Home() {
+  return <h2>Home</h2>;
+}
+
+function About() {
+  return <h2>About</h2>;
+}
+
+function Users() {
+  return <h2>Users</h2>;
+}
 
 function App() {
   const [user, setUser] = useState(null)
@@ -29,14 +46,26 @@ function App() {
 
   return (
     <React.Fragment>
-    <CssBaseline />
-      <div className="App">
-      <Navbar user={user}/>
-        <h1>Hello {user}</h1>
-        
+      <CssBaseline />
+      <Router>
+        <div className="App">
+        <Navbar user={user}/>
+        <Switch>
+          <Route path="/profile">
+            <About />
+          </Route>
+          <Route path="/account">
+            <Users />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+          <h1>Hello {user}</h1>
+          
 
-      </div>
-      
+        </div>
+      </Router>
     </React.Fragment>
   );
 }

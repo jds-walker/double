@@ -3,7 +3,10 @@ import Amplify, { Auth } from 'aws-amplify';
 import awsconfig from './aws-exports';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Navbar from './components/navbar/Navbar'
+import Login from './components/login/Login'
+import CreateAccount from './components/create-account/CreateAccount'
 import { Hub } from 'aws-amplify';
+import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
@@ -56,6 +59,12 @@ function App() {
           </Route>
           <Route path="/account">
             <Users />
+          </Route>
+          <Route path="/login">
+            <Login/>
+          </Route>
+          <Route path="/create-account">
+            <CreateAccount/>
           </Route>
           <Route path="/">
             <Home />

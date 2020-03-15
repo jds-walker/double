@@ -5,7 +5,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import SimpleMenu from '../simple-menu/SimpleMenu';
-import { Auth } from 'aws-amplify'
+import { Auth } from 'aws-amplify';
+import { Link } from 'react-router-dom';
 
 
 const useStyles = makeStyles(theme => ({
@@ -33,7 +34,9 @@ export default function Navbar({user}) {
           </Typography>
           {
             (user === null) ?
-            <Button color="inherit" onClick={() => Auth.federatedSignIn()}>Login</Button> :
+            <Link to='./login'>
+              <Button color="inherit">login</Button>
+            </Link> : 
             <Button color="inherit" onClick={() => Auth.signOut()}>Logout</Button>
           }
         </Toolbar>

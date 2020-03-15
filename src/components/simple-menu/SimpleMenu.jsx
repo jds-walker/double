@@ -10,10 +10,6 @@ const useStyles = makeStyles(theme => ({
   menuButton: {
     marginRight: theme.spacing(2),
   },
-  link: {
-    textDecoration: 'none',
-    color: 'black',
-  }
 }));
 
 export default function SimpleMenu() {
@@ -47,13 +43,13 @@ export default function SimpleMenu() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <Link className={classes.link} to="/profile">
+        <Link to="/profile">
           <MenuItem onClick={handleClose}>Profile</MenuItem>
         </Link>
-        <Link className={classes.link} to="/account">
+        <Link to="/account">
           <MenuItem onClick={handleClose}>Account</MenuItem>
         </Link>
-        <Link className={classes.link} to="/">
+        <Link to="/">
           <MenuItem onClick={handleClose}>Home</MenuItem>
         </Link>
       </Menu>

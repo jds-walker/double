@@ -26,7 +26,7 @@ export default function Navbar({user}) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar>
           <SimpleMenu/>
           <Typography variant="h6" className={classes.title}>
@@ -41,6 +41,7 @@ export default function Navbar({user}) {
           }
         </Toolbar>
       </AppBar>
+      <Toolbar/>
     </div>
   );
 }

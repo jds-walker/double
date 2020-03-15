@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Amplify, { Auth } from 'aws-amplify';
 import awsconfig from './aws-exports';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Container from '@material-ui/core/Container'
+import { makeStyles } from '@material-ui/core/styles';
 import Navbar from './components/navbar/Navbar'
 import Login from './components/login/Login'
 import CreateAccount from './components/create-account/CreateAccount'
@@ -27,8 +29,17 @@ function Users() {
   return <h2>Users</h2>;
 }
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    // margin: '0 auto',
+    },
+  }
+));
+
+
 function App() {
   const [user, setUser] = useState(null)
+  const classes = useStyles();
 
   useEffect(() => {
     const listener = (data) => {
@@ -46,6 +57,7 @@ function App() {
     })
 
   })
+  
 
   return (
     <React.Fragment>
@@ -53,26 +65,27 @@ function App() {
       <Router>
         <div className="App">
         <Navbar user={user}/>
-        <Switch>
-          <Route path="/profile">
-            <About />
-          </Route>
-          <Route path="/account">
-            <Users />
-          </Route>
-          <Route path="/login">
-            <Login/>
-          </Route>
-          <Route path="/create-account">
-            <CreateAccount/>
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-          <h1>Hello {user}</h1>
-          
-
+        <Container className={classes.root}>
+          <Switch>
+            <Route path="/profile">
+              <About />
+            </Route>
+            <Route path="/account">
+              <Users />
+            </Route>
+            <Route path="/login">
+              <Login/>
+            </Route>
+            <Route path="/create-account">
+              <CreateAccount/>
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+            <h1>Hello {user}</h1>
+            
+        </Container>
         </div>
       </Router>
     </React.Fragment>

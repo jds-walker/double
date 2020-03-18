@@ -16,18 +16,24 @@ const useStyles = makeStyles(theme => ({
 
 export default function CreateAccount() {
   const classes = useStyles();
-  const [username, setUsername] = useState("");
+  const [user, setUser] = useState({
+    username: '',
+  });
+
+
+
 
   const handleSubmit = async event => {
     event.preventDefault();
-    console.log(username)
+    console.log(user.username)
   }
 
   const handleOnChange = event => {
-    const {label, value} = event.target;
-
-    setUsername(value)
-    console.log(username)
+    const {name, value} = event.target;
+    console.log(event.target)
+    console.log(value)
+    setUser({...user, [name]: value})
+    console.log(user.username)
   }
 
   return (
@@ -40,20 +46,23 @@ export default function CreateAccount() {
         <TextField 
             required 
             id="standard-required" 
-            label="username" 
-            value={username}
+            name='username' 
+            label='username'
+            value={user.username}
             onChange={handleOnChange}
         />
         <TextField
           required 
           id="standard-password-input"
+          name="password"
           label="password"
           type="password"
         />
       <TextField
           required 
           id="standard-password-confirmation-input"
-          label="confirmPassword"
+          name="confirmPassword"
+          label="confirm password"
           type="password"
         />
         <TextField

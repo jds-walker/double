@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { Auth } from 'aws-amplify';
+import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
@@ -18,48 +17,53 @@ const useStyles = makeStyles(theme => ({
 export default function CreateAccount() {
   const classes = useStyles();
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState("SignUp")
 
-  function handleOnChange(event) {
-    console.log(event.target)
-    setUsername(event.target.value)
+  const handleSubmit = async event => {
+    event.preventDefault();
+    console.log(username)
+  }
+
+  const handleOnChange = event => {
+    const {label, value} = event.target;
+
+    setUsername(value)
+    console.log(username)
   }
 
   return (
     <div>
     <h1>Create Account</h1>
-    <form className={classes.root} noValidate autoComplete="off">
+    <form className={classes.root} noValidate autoComplete="off"
+      onSubmit={handleSubmit}
+    >
       <div>
         <TextField 
             required 
             id="standard-required" 
-            label="Username" 
+            label="username" 
             value={username}
-            onChange={event => handleOnChange(event)}
+            onChange={handleOnChange}
         />
         <TextField
           required 
           id="standard-password-input"
-          label="Password"
+          label="password"
           type="password"
         />
       <TextField
           required 
           id="standard-password-confirmation-input"
-          label="Confirm Password"
+          label="confirmPassword"
           type="password"
         />
         <TextField
           required 
           id="email"
-          label="Email"
+          label="email"
           type="email"
         />
       </div>
-        <Button>Submit</Button>
+        <Button type="submit">Submit</Button>
     </form>
     </div>
   );

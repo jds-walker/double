@@ -3,10 +3,10 @@ import Amplify, { Auth } from 'aws-amplify';
 import awsconfig from './aws-exports';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container'
-import { makeStyles } from '@material-ui/core/styles';
 import Navbar from './components/navbar/Navbar'
 import Login from './components/login/Login'
 import CreateAccount from './components/create-account/CreateAccount'
+import Verify from './components/verify/Verify'
 import { Hub } from 'aws-amplify';
 import './App.css';
 import {
@@ -17,29 +17,12 @@ import {
 
 Amplify.configure(awsconfig);
 
-function Home() {
-  return <h2>Home</h2>;
-}
-
-function About() {
-  return <h2>About</h2>;
-}
-
-function Users() {
-  return <h2>Users</h2>;
-}
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    // margin: '0 auto',
-    },
-  }
-));
-
-
 function App() {
-  const [user, setUser] = useState(null)
-  const classes = useStyles();
+  const [user, setUser] = useState({
+    username: '',
+    password: '',
+    email: '',
+  });
 
   useEffect(() => {
     const listener = (data) => {
@@ -65,26 +48,18 @@ function App() {
       <Router>
         <div className="App">
         <Navbar user={user}/>
-        <Container className={classes.root}>
+        <Container>
           <Switch>
-            <Route path="/profile">
-              <About />
-            </Route>
-            <Route path="/account">
-              <Users />
-            </Route>
             <Route path="/login">
-              <Login/>
+              <Login user={user}/>
             </Route>
             <Route path="/create-account">
-              <CreateAccount/>
+              <CreateAccount user={user}/>
             </Route>
-            <Route path="/">
-              <Home />
+            <Route path="/verify">
+              <Verify user={user}/>
             </Route>
           </Switch>
-            <h1>Hello {user}</h1>
-            
         </Container>
         </div>
       </Router>

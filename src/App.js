@@ -27,7 +27,12 @@ function App() {
   useEffect(() => {
     const listener = (data) => {
       if (data.payload.event === "signOut"){
-        setUser(null);      
+        setUser({
+          username: '',
+          password: '',
+          email: '',
+        });      
+        
       }
       Auth.currentUserInfo().then((data) => {
         if (data != null) {setUser(data.username)}
@@ -38,7 +43,7 @@ function App() {
     Auth.currentUserInfo().then((data) => {
       if (data != null) {setUser(data.username)}
     })
-
+    console.log(Auth.currentAuthenticatedUser())
   })
   
 

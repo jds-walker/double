@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Auth } from 'aws-amplify';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, Paper, Box, Typography } from '@material-ui/core';
@@ -34,26 +35,59 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
+
+
 export default function Login() {
+  
+  const [credentials, setCredentials] = useState({
+    email: '',
+    password: '',
+  });
+
+  const {email, password} = credentials;
+
   const classes = useStyles();
+
+  const handleOnChange = event => {
+    const {name, value} = event.target; 
+    setCredentials({...credentials, [name]: value})
+  }
+
+  const handleOnSubmit = async event => {
+    event.preventDefault();
+    Auth.signIn(email, password)
+      .then(user => console.log(user))
+      .catch(err => console.log(err));
+  }
 
   return (
       <Paper className={classes.paper}>
           
     <form className={classes.form} noValidate autoComplete="off">
       
-      <Typography variant='h5' component='h2'>Login</Typography>
-        <TextField className={classes.text} required id="standard-required" label="Username" />
+      <Typography variant='h5' component='h2' >Login</Typography>
+        <TextField 
+          className={classes.text}
+            required 
+            id="standard-required" 
+            name='email' 
+            label='email'
+            value={email}
+            onChange={handleOnChange}
+        />
         <TextField
           className={classes.text}
           id="standard-password-input"
           required
           label="Password"
+          name="password"
           type="password"
           autoComplete="current-password"
+          value={password}
+          onChange={handleOnChange}
         />
         <Box className = {classes.buttonbox}>
-          <Button className = {classes.button} type="submit">Submit</Button>
+          <Button className = {classes.button} onClick={handleOnSubmit}>Submit</Button>
           <Link className={classes.button} to="/create-account">
             <Button className = {classes.button}>Create Account</Button>
           </Link>

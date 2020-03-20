@@ -18,32 +18,15 @@ import {
 Amplify.configure(awsconfig);
 
 function App() {
-  const [user, setUser] = useState({
-    username: '',
-    password: '',
-    email: '',
-  });
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const listener = (data) => {
       if (data.payload.event === "signOut"){
-        setUser({
-          username: '',
-          password: '',
-          email: '',
-        });      
-        
+        setUser(null);
       }
-      Auth.currentUserInfo().then((data) => {
-        if (data != null) {setUser(data.username)}
-      })
     }
     Hub.listen('auth', listener);
-
-    Auth.currentUserInfo().then((data) => {
-      if (data != null) {setUser(data.username)}
-    })
-    console.log(Auth.currentAuthenticatedUser())
   })
   
 

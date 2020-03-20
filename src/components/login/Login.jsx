@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Auth } from 'aws-amplify';
+import { useHistory } from 'react-router-dom'
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, Paper, Box, Typography } from '@material-ui/core';
@@ -43,10 +44,9 @@ export default function Login() {
     email: '',
     password: '',
   });
-
   const {email, password} = credentials;
-
   const classes = useStyles();
+  const history = useHistory();
 
   const handleOnChange = event => {
     const {name, value} = event.target; 
@@ -57,6 +57,7 @@ export default function Login() {
     event.preventDefault();
     Auth.signIn(email, password)
       .then(user => console.log(user))
+      .then(history.push('/'))
       .catch(err => console.log(err));
   }
 

@@ -37,21 +37,22 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Verify({user}) {
-const [code, setCode] = useState("");
+const [credentials, setCredentials] = useState({
+  email: '',
+  code: '',
+});
 const classes = useStyles();
-
-const {username} = user;
-
 const history = useHistory();
+const { email, code } = credentials;
 
 const handleOnChange = event => {
-    const { value } = event.target;
-    setCode(value);
+    const { name, value } = event.target;
+    setCredentials({...credentials, [name]: value});
 }
 
 const handleOnSubmit = async event => {
     event.preventDefault();
-    Auth.confirmSignUp(username, code, {
+    Auth.confirmSignUp(email, code, {
         // Optional. Force user confirmation irrespective of existing alias. By default set to True.
         forceAliasCreation: true
       })
@@ -66,6 +67,17 @@ const handleOnSubmit = async event => {
     <form className={classes.form} noValidate autoComplete="off" onSubmit={handleOnSubmit}>
       
       <Typography variant='h5' component='h2'>Verify Account</Typography>
+        <TextField
+          className={classes.text}
+          id="email"
+          required
+          label="Email"
+          type="email"
+          autoComplete="email"
+          value={email}
+          name="email"
+          onChange={handleOnChange}
+        />
         <TextField
           className={classes.text}
           id="code"

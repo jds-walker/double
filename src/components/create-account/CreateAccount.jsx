@@ -39,12 +39,11 @@ const useStyles = makeStyles(theme => ({
 export default function CreateAccount() {
   const classes = useStyles();
   const [user, setUser] = useState({
-    username: '',
-    password: '',
     email: '',
+    password: '',
   });
 
-  const {username, password, email} = user;
+  const {password, email} = user;
 
   const history = useHistory();
 
@@ -52,19 +51,10 @@ export default function CreateAccount() {
     event.preventDefault();
     console.log(user)
 
-    
-
-    Auth.signUp({
-      username,
-      password,
-      attributes: {
-        email, // optional
-      },
-      validationData: [] //optional
-    })
-    .then(data => console.log(data))
-    .then(() => history.push())
-    .catch(err => console.log(err))
+    Auth.signUp(email, password)
+      .then(data => console.log(data))
+      .then(history.push('/verify'))
+      .catch(err => console.log(err));
   }
 
   const handleOnChange = event => {

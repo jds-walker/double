@@ -5,7 +5,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container'
 import Navbar from './components/navbar/Navbar'
 import Login from './components/login/Login'
-import Register from './components/register/Register'
+import Verify from './components/verify/Verify'
+import CreateAccount from './components/create-account/CreateAccount'
 
 import { Hub } from 'aws-amplify';
 import './App.css';
@@ -42,7 +43,9 @@ function App() {
     .then(data => {
       setUser(data)
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.log(err)
+    });
   
   }, [])
   
@@ -58,8 +61,11 @@ function App() {
             <Route path="/login">
               <Login user={user}/>
             </Route>
-            <Route path="/register">
-              <Register/>
+            <Route path="/create-account">
+              <CreateAccount/>
+            </Route>
+            <Route path="/verify">
+              <Verify/>
             </Route>
           </Switch>
         </Container>

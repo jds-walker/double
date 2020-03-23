@@ -3,9 +3,6 @@ import { useHistory } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, Paper, Box, Typography } from '@material-ui/core';
-import {Auth} from 'aws-amplify';
-
-
 
 const useStyles = makeStyles(theme => ({
     form: {
@@ -38,40 +35,62 @@ const useStyles = makeStyles(theme => ({
 
 export default function CreateAccount() {
   const classes = useStyles();
-  const [user, setUser] = useState({
-    email: '',
-    password: '',
-  });
 
-  const {password, email} = user;
-
+  const [credentials, setCredentials] = useState({
+      firstname: '',
+      surname: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+  })
+    
   const history = useHistory();
+  const {firstname, surname, email, password, confirmPassword} = credentials;
 
   const handleSubmit = async event => {
     event.preventDefault();
-    console.log(user)
-
-    Auth.signUp(email, password)
-      .then(data => console.log(data))
-      .then(history.push('/verify'))
-      .catch(err => console.log(err));
+    // console.log(credentials)
+    history.push('/verify')
+    // Auth.signUp(email, password)
+    //   .then(data => console.log(data))
+    //   .then(history.push('/verify'))
+    //   .catch(err => console.log(err));
   }
 
   const handleOnChange = event => {
     const {name, value} = event.target;
-    setUser({...user, [name]: value})
+    setCredentials({...credentials, [name]: value})
+
   }
 
   return (
     <Paper className={classes.paper}>
-    <Typography variant='h5' component='h2'>Create Account</Typography>
+    <Typography variant='h5' component='h2'>Register</Typography>
     <form className={classes.form} noValidate autoComplete="off"
       onSubmit={handleSubmit}
-    >
+    > 
         <TextField 
           className={classes.text}
             required 
-            id="standard-required" 
+            id="firstname" 
+            name='firstname' 
+            label='first name'
+            value={firstname}
+            onChange={handleOnChange}
+        />
+        <TextField 
+          className={classes.text}
+            required 
+            id="surname" 
+            name='surname' 
+            label='surname'
+            value={surname}
+            onChange={handleOnChange}
+        />
+        <TextField 
+          className={classes.text}
+            required 
+            id="email" 
             name='email' 
             label='email'
             value={email}
@@ -94,6 +113,8 @@ export default function CreateAccount() {
           name="confirmPassword"
           label="confirm password"
           type="password"
+          value={confirmPassword}
+          onChange={handleOnChange}
         />
       <Box 
         className = {classes.buttonbox}

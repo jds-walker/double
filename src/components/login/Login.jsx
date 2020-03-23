@@ -89,7 +89,7 @@ export default function Login() {
         />
         <Box className = {classes.buttonbox}>
           <Button className = {classes.button} type= "submit">Submit</Button>
-          <Link className={classes.button} to="/register">
+          <Link className={classes.button} to="/create-account">
             <Button className = {classes.button}>Create Account</Button>
           </Link>
         </Box>

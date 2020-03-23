@@ -6,6 +6,13 @@ const awsmobile = {
     "aws_appsync_region": "ap-southeast-2",
     "aws_appsync_authenticationType": "API_KEY",
     "aws_appsync_apiKey": "da2-t52rdmmnmrhxxl7fyqcncoifye",
+    "aws_cloud_logic_custom": [
+        {
+            "name": "AdminQueries",
+            "endpoint": "https://x8h50rssb4.execute-api.ap-southeast-2.amazonaws.com/amplify",
+            "region": "ap-southeast-2"
+        }
+    ],
     "aws_cognito_identity_pool_id": "ap-southeast-2:7c632198-d856-435b-8506-27944f53901a",
     "aws_cognito_region": "ap-southeast-2",
     "aws_user_pools_id": "ap-southeast-2_Ck3Zisg0i",
@@ -19,7 +26,7 @@ const awsmobile = {
             "profile",
             "aws.cognito.signin.user.admin"
         ],
-        "redirectSignIn": "http://localhost:3000/",
+        "redirectSignIn": "http://localhost:3000/,http://localhost:3000/,http://localhost:3000/",
         "redirectSignOut": "http://localhost:3000/",
         "responseType": "code"
     },

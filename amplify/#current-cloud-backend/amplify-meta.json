@@ -35,8 +35,39 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/amplify-double-amplify-80617-deployment/amplify-cfn-templates/api/cloudformation-template.json",
 				"logicalId": "apiamplifyDatasource"
 			},
-			"lastPushTimeStamp": "2020-03-13T22:26:06.328Z",
+			"lastPushTimeStamp": "2020-03-23T04:21:42.258Z",
 			"lastPushDirHash": "ijpG9jA/6wGRX3EwUxuczNpvs70="
+		},
+		"AdminQueries": {
+			"service": "API Gateway",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [
+				{
+					"category": "auth",
+					"resourceName": "double3e9a859a",
+					"attributes": [
+						"UserPoolId"
+					]
+				},
+				{
+					"category": "function",
+					"resourceName": "AdminQueriesb0bd2d34",
+					"attributes": [
+						"Arn",
+						"Name"
+					]
+				}
+			],
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-double-amplify-80617-deployment/amplify-cfn-templates/api/admin-queries-cloudformation-template.json",
+				"logicalId": "apiAdminQueries"
+			},
+			"lastPushTimeStamp": "2020-03-23T04:21:42.268Z",
+			"output": {
+				"ApiName": "AdminQueries",
+				"RootUrl": "https://x8h50rssb4.execute-api.ap-southeast-2.amazonaws.com/amplify"
+			},
+			"lastPushDirHash": "IH1b4d+PvntvKD6Ip4bjugqdV58="
 		}
 	},
 	"auth": {
@@ -44,12 +75,11 @@
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation",
 			"dependsOn": [],
-			"customAuth": false,
 			"providerMetadata": {
 				"s3TemplateURL": "https://s3.amazonaws.com/amplify-double-amplify-80617-deployment/amplify-cfn-templates/auth/double3e9a859a-cloudformation-template.yml",
 				"logicalId": "authdouble3e9a859a"
 			},
-			"lastPushTimeStamp": "2020-03-13T22:26:06.333Z",
+			"lastPushTimeStamp": "2020-03-23T04:21:42.268Z",
 			"output": {
 				"AppClientSecret": "n9lteuhfp3f2a145ncittg87nv1napeqd0ncdc5naggab5h29us",
 				"UserPoolId": "ap-southeast-2_Ck3Zisg0i",
@@ -58,10 +88,67 @@
 				"HostedUIDomain": "double3e9a859a-3e9a859a-amplify",
 				"IdentityPoolId": "ap-southeast-2:7c632198-d856-435b-8506-27944f53901a",
 				"IdentityPoolName": "double3e9a859a_identitypool_3e9a859a__amplify",
-				"OAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/\",\"http://localhost:3000/\"],\"LogoutURLs\":[\"http://localhost:3000/\"]}",
-				"UserPoolName": "double3e9a859a_userpool_3e9a859a"
+				"OAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/\",\"http://localhost:3000/\",\"http://localhost:3000/\"],\"LogoutURLs\":[\"http://localhost:3000/\"]}",
+				"UserPoolName": "double3e9a859a_userpool_3e9a859a",
+				"CreatedSNSRole": "arn:aws:iam::821377504967:role/sns80617-amplify"
 			},
-			"lastPushDirHash": "wXkrIxG5lT00fvqO1zfItVlRfLI="
+			"lastPushDirHash": "czBPE+qzOYU0z1wY8vn+4tDZCiM="
+		},
+		"userPoolGroups": {
+			"service": "Cognito-UserPool-Groups",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [
+				{
+					"category": "auth",
+					"resourceName": "double3e9a859a",
+					"attributes": [
+						"UserPoolId",
+						"AppClientIDWeb",
+						"AppClientID",
+						"IdentityPoolId"
+					]
+				}
+			],
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-double-amplify-80617-deployment/amplify-cfn-templates/auth/template.json",
+				"logicalId": "authuserPoolGroups"
+			},
+			"lastPushTimeStamp": "2020-03-23T04:21:42.268Z",
+			"output": {
+				"adminGroupRole": "arn:aws:iam::821377504967:role/ap-southeast-2_Ck3Zisg0i-adminGroupRole"
+			},
+			"lastPushDirHash": "jK4nBjI5jxgrj7WDx1FravNWyDw="
+		}
+	},
+	"function": {
+		"AdminQueriesb0bd2d34": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true,
+			"dependsOn": [
+				{
+					"category": "auth",
+					"resourceName": "double3e9a859a",
+					"attributes": [
+						"UserPoolId"
+					]
+				}
+			],
+			"lastBuildTimeStamp": "2020-03-23T04:17:40.522Z",
+			"lastPackageTimeStamp": "2020-03-23T04:17:46.558Z",
+			"distZipFilename": "AdminQueriesb0bd2d34-68654134693632315033-build.zip",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-double-amplify-80617-deployment/amplify-cfn-templates/function/AdminQueriesb0bd2d34-cloudformation-template.json",
+				"logicalId": "functionAdminQueriesb0bd2d34"
+			},
+			"lastPushTimeStamp": "2020-03-23T04:21:42.268Z",
+			"output": {
+				"Region": "ap-southeast-2",
+				"Arn": "arn:aws:lambda:ap-southeast-2:821377504967:function:AdminQueriesb0bd2d34-amplify",
+				"Name": "AdminQueriesb0bd2d34-amplify",
+				"LambdaExecutionRole": "AdminQueriesb0bd2d34LambdaRole-amplify"
+			},
+			"lastPushDirHash": "n4pbs0+qlzh/TxJS1RCDZm0UtjE="
 		}
 	}
 }

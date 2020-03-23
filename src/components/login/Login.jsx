@@ -43,6 +43,10 @@ export default function Login() {
   const [credentials, setCredentials] = useState({
     email: '',
     password: '',
+    error: {
+      email: '',
+      password: '',
+    }
   });
   const {email, password} = credentials;
   const classes = useStyles();
@@ -56,10 +60,25 @@ export default function Login() {
   const handleOnSubmit = async event => {
     event.preventDefault();
     Auth.signIn(email, password)
-      .then(user => console.log(user))
-      .then(history.push('/'))
-      .catch(err => console.log(err));
-  }
+      .then(user => {
+        if (user.username) {
+          history.push("/")
+        }
+      })
+      .catch(err => {console.log(err)
+        if (err.code === "UserNotConfirmedException") {
+          history.push('/verify', {"email": email})
+        }
+        else if (err.code === 'NotAuthorizedException' || err.code === 'UserNotFoundException') {
+        // The error happens when the incorrect password is provided or supplied username/email does not exist in the Cognito user pool
+          
+          console.log("unknown username or password")
+          setCredentials({...credentials, error: {
+            email: 'Unknown email or password',
+            password: 'Unknown email or password'
+          }})
+  }})}
+  
 
   return (
       <Paper className={classes.paper}>

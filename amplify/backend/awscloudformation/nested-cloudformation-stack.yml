@@ -83,6 +83,39 @@
 				}
 			}
 		},
+		"apiAdminQueries": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/amplify-double-amplify-80617-deployment/amplify-cfn-templates/api/admin-queries-cloudformation-template.json",
+				"Parameters": {
+					"authRoleName": {
+						"Ref": "AuthRoleName"
+					},
+					"unauthRoleName": {
+						"Ref": "UnauthRoleName"
+					},
+					"authdouble3e9a859aUserPoolId": {
+						"Fn::GetAtt": [
+							"authdouble3e9a859a",
+							"Outputs.UserPoolId"
+						]
+					},
+					"functionAdminQueriesb0bd2d34Arn": {
+						"Fn::GetAtt": [
+							"functionAdminQueriesb0bd2d34",
+							"Outputs.Arn"
+						]
+					},
+					"functionAdminQueriesb0bd2d34Name": {
+						"Fn::GetAtt": [
+							"functionAdminQueriesb0bd2d34",
+							"Outputs.Name"
+						]
+					},
+					"env": "amplify"
+				}
+			}
+		},
 		"authdouble3e9a859a": {
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
@@ -93,8 +126,8 @@
 					"resourceNameTruncated": "double3e9a859a",
 					"userPoolName": "double3e9a859a_userpool_3e9a859a",
 					"autoVerifiedAttributes": "email",
-					"mfaConfiguration": "OFF",
-					"mfaTypes": "SMS Text Message",
+					"mfaConfiguration": "OPTIONAL",
+					"mfaTypes": "SMS Text Message,TOTP",
 					"smsAuthenticationMessage": "Your authentication code is {####}",
 					"smsVerificationMessage": "Your verification code is {####}",
 					"emailVerificationSubject": "Your verification code",
@@ -123,16 +156,86 @@
 							"Arn"
 						]
 					},
-					"useDefault": "defaultSocial",
+					"useDefault": "manual",
 					"hostedUI": true,
 					"usernameAttributes": "email",
 					"hostedUIDomainName": "double3e9a859a-3e9a859a",
 					"authProvidersUserPool": "",
 					"hostedUIProviderMeta": "[]",
-					"userPoolGroupList": "",
+					"userPoolGroupList": "admin",
 					"dependsOn": "",
-					"oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/\",\"http://localhost:3000/\"],\"LogoutURLs\":[\"http://localhost:3000/\"]}",
+					"thirdPartyAuth": true,
+					"authProviders": "",
+					"userPoolGroups": true,
+					"adminQueries": true,
+					"triggers": "{}",
+					"oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/\",\"http://localhost:3000/\",\"http://localhost:3000/\"],\"LogoutURLs\":[\"http://localhost:3000/\"]}",
+					"adminQueryGroup": "admin",
+					"parentStack": {
+						"Ref": "AWS::StackId"
+					},
+					"permissions": "",
 					"hostedUIProviderCreds": "[]",
+					"env": "amplify"
+				}
+			}
+		},
+		"authuserPoolGroups": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/amplify-double-amplify-80617-deployment/amplify-cfn-templates/auth/template.json",
+				"Parameters": {
+					"AuthRoleArn": {
+						"Fn::GetAtt": [
+							"AuthRole",
+							"Arn"
+						]
+					},
+					"UnauthRoleArn": {
+						"Fn::GetAtt": [
+							"UnauthRole",
+							"Arn"
+						]
+					},
+					"authdouble3e9a859aUserPoolId": {
+						"Fn::GetAtt": [
+							"authdouble3e9a859a",
+							"Outputs.UserPoolId"
+						]
+					},
+					"authdouble3e9a859aAppClientIDWeb": {
+						"Fn::GetAtt": [
+							"authdouble3e9a859a",
+							"Outputs.AppClientIDWeb"
+						]
+					},
+					"authdouble3e9a859aAppClientID": {
+						"Fn::GetAtt": [
+							"authdouble3e9a859a",
+							"Outputs.AppClientID"
+						]
+					},
+					"authdouble3e9a859aIdentityPoolId": {
+						"Fn::GetAtt": [
+							"authdouble3e9a859a",
+							"Outputs.IdentityPoolId"
+						]
+					},
+					"env": "amplify"
+				}
+			}
+		},
+		"functionAdminQueriesb0bd2d34": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/amplify-double-amplify-80617-deployment/amplify-cfn-templates/function/AdminQueriesb0bd2d34-cloudformation-template.json",
+				"Parameters": {
+					"authdouble3e9a859aUserPoolId": {
+						"Fn::GetAtt": [
+							"authdouble3e9a859a",
+							"Outputs.UserPoolId"
+						]
+					},
 					"env": "amplify"
 				}
 			}

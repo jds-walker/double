@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Auth } from 'aws-amplify';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, Paper, Box, Typography } from '@material-ui/core';
@@ -42,14 +42,14 @@ const [credentials, setCredentials] = useState({
   code: '',
 });
 const classes = useStyles();
+const location = useLocation();
 const history = useHistory();
 const { email, code } = credentials;
 
 useEffect(() => {
-  console.log(Auth.currentAuthenticatedUser());
-  console.log(Auth.currentCredentials());
-
-}, [])
+  console.log(Auth.currentCredentials())
+  console.log(location)
+}, [location])
 
 const handleOnChange = event => {
     const { name, value } = event.target;
@@ -75,6 +75,17 @@ const handleOnSubmit = async event => {
     <form className={classes.form} noValidate autoComplete="off" onSubmit={handleOnSubmit}>
       
       <Typography variant='h5' component='h2'>Verify Account</Typography>
+      <TextField
+          className={classes.text}
+          id="email"
+          required
+          label="email"
+          type="email"
+          autoComplete="email"
+          value={email}
+          name="email"
+          onChange={handleOnChange}
+        />
         <TextField
           className={classes.text}
           id="code"

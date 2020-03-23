@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Auth } from 'aws-amplify';
 import { useHistory } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
@@ -47,15 +48,27 @@ export default function CreateAccount() {
   const history = useHistory();
   const {firstname, surname, email, password, confirmPassword} = credentials;
 
+
   const handleSubmit = async event => {
     event.preventDefault();
-    // console.log(credentials)
-    history.push('/verify')
-    // Auth.signUp(email, password)
-    //   .then(data => console.log(data))
-    //   .then(history.push('/verify'))
-    //   .catch(err => console.log(err));
-  }
+    console.log(credentials)
+    Auth.signUp({
+      "username": email,
+      "password": password,
+      attributes: {
+        "custom:firstname": firstname, 
+        "custom:surname": surname, 
+      },
+      validationData: [] //optional
+    })
+      .then(data => {console.log(data)
+        if (data.user) {
+          history.push('/verify')
+        }
+      })
+
+      .catch(err => console.log(err))
+  };
 
   const handleOnChange = event => {
     const {name, value} = event.target;

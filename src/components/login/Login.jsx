@@ -64,7 +64,7 @@ export default function Login() {
   return (
       <Paper className={classes.paper}>
           
-    <form className={classes.form} noValidate autoComplete="off">
+    <form className={classes.form} onSubmit={handleOnSubmit} noValidate autoComplete="off">
       
       <Typography variant='h5' component='h2' >Login</Typography>
         <TextField 
@@ -88,8 +88,8 @@ export default function Login() {
           onChange={handleOnChange}
         />
         <Box className = {classes.buttonbox}>
-          <Button className = {classes.button} onClick={handleOnSubmit}>Submit</Button>
-          <Link className={classes.button} to="/create-account">
+          <Button className = {classes.button} type= "submit">Submit</Button>
+          <Link className={classes.button} to="/register">
             <Button className = {classes.button}>Create Account</Button>
           </Link>
         </Box>

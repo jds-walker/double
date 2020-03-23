@@ -5,8 +5,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container'
 import Navbar from './components/navbar/Navbar'
 import Login from './components/login/Login'
-import CreateAccount from './components/create-account/CreateAccount'
-import Verify from './components/verify/Verify'
+import Register from './components/register/Register'
+
 import { Hub } from 'aws-amplify';
 import './App.css';
 import {
@@ -35,6 +35,15 @@ function App() {
 
     }
     Hub.listen('auth', listener);
+  
+    Auth.currentAuthenticatedUser({
+      bypassCache: true // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
+    })
+    .then(data => {
+      setUser(data)
+    })
+    .catch(err => console.log(err));
+  
   }, [])
   
 
@@ -49,11 +58,8 @@ function App() {
             <Route path="/login">
               <Login user={user}/>
             </Route>
-            <Route path="/create-account">
-              <CreateAccount user={user}/>
-            </Route>
-            <Route path="/verify">
-              <Verify user={user}/>
+            <Route path="/register">
+              <Register/>
             </Route>
           </Switch>
         </Container>

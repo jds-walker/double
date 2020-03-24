@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom'
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, Paper, Box, Typography } from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
 
 import { Link } from 'react-router-dom'
 
@@ -44,16 +45,17 @@ export default function Login() {
     email: '',
     password: '',
     error: {
-      email: '',
-      password: '',
+      warning: null,
+      password: null,
     }
   });
-  const {email, password} = credentials;
+  const {email, password, error} = credentials;
   const classes = useStyles();
   const history = useHistory();
 
   const handleOnChange = event => {
     const {name, value} = event.target; 
+
     setCredentials({...credentials, [name]: value})
   }
 
@@ -71,48 +73,47 @@ export default function Login() {
         }
         else if (err.code === 'NotAuthorizedException' || err.code === 'UserNotFoundException') {
         // The error happens when the incorrect password is provided or supplied username/email does not exist in the Cognito user pool
-          
-          console.log("unknown username or password")
           setCredentials({...credentials, error: {
-            email: 'Unknown email or password',
-            password: 'Unknown email or password'
+            warning: 'Unknown email or password',
           }})
   }})}
   
 
   return (
       <Paper className={classes.paper}>
-          
-    <form className={classes.form} onSubmit={handleOnSubmit} noValidate autoComplete="off">
-      
-      <Typography variant='h5' component='h2' >Login</Typography>
-        <TextField 
-          className={classes.text}
-            required 
-            id="standard-required" 
-            name='email' 
-            label='email'
-            value={email}
+        <form className={classes.form} onSubmit={handleOnSubmit} noValidate autoComplete="off">
+          <Typography variant='h5' component='h2' >Login</Typography>
+          {error.email ? 
+          <Alert className={classes.text} severity="warning">{error.email}</Alert>:
+          <Alert className={classes.text} severity="info">Enter email and password</Alert>}
+          <TextField 
+            className={classes.text}
+              required 
+              id="standard-required" 
+              name='email' 
+              label='email'
+              value={email}
+              onChange={handleOnChange}
+          />
+          <TextField
+            className={classes.text}
+            id="standard-password-input"
+            required
+            label="Password"
+            name="password"
+            type="password"
+            autoComplete="current-password"
+            value={password}
             onChange={handleOnChange}
-        />
-        <TextField
-          className={classes.text}
-          id="standard-password-input"
-          required
-          label="Password"
-          name="password"
-          type="password"
-          autoComplete="current-password"
-          value={password}
-          onChange={handleOnChange}
-        />
-        <Box className = {classes.buttonbox}>
-          <Button className = {classes.button} type= "submit">Submit</Button>
-          <Link className={classes.button} to="/create-account">
-            <Button className = {classes.button}>Create Account</Button>
-          </Link>
-        </Box>
-    </form>
+          />
+          <Box className = {classes.buttonbox}>
+            <Button className = {classes.button} type= "submit">Submit</Button>
+            <Link className={classes.button} to="/create-account">
+              <Button className = {classes.button}>Create Account</Button>
+            </Link>
+          </Box>
+          
+      </form>
     </Paper>
   );
 }

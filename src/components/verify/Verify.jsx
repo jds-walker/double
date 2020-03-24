@@ -4,7 +4,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, Paper, Box, Typography } from '@material-ui/core';
-
+import Alert from '@material-ui/lab/Alert';
 
 
 
@@ -40,11 +40,12 @@ export default function Verify() {
 const [credentials, setCredentials] = useState({
   email: '',
   code: '',
+  error: false,
 });
 const classes = useStyles();
 const location = useLocation();
 const history = useHistory();
-const { email, code } = credentials;
+const { email, code, error } = credentials;
 
 useEffect(() => {
   console.log(Auth.currentCredentials())
@@ -52,7 +53,7 @@ useEffect(() => {
 }, [location])
 
 const handleOnChange = event => {
-    const { name, value } = event.target;
+    const { name, value, } = event.target;
     setCredentials({...credentials, [name]: value});
 }
 
@@ -75,6 +76,9 @@ const handleOnSubmit = async event => {
     <form className={classes.form} noValidate autoComplete="off" onSubmit={handleOnSubmit}>
       
       <Typography variant='h5' component='h2'>Verify Account</Typography>
+      {error ? 
+          <Alert className={classes.text} severity="warning">{error.email}</Alert>:
+          <Alert className={classes.text} severity="info">check your email for verification</Alert>}
       <TextField
           className={classes.text}
           id="email"

@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Auth } from 'aws-amplify';
 import { useHistory } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, Paper, Box, Typography } from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles(theme => ({
     form: {
@@ -43,10 +44,15 @@ export default function CreateAccount() {
       email: '',
       password: '',
       confirmPassword: '',
+      message: {
+        severity: 'info',
+        info: 'email address will become your login',
+      }
+      
   })
-    
+
   const history = useHistory();
-  const {firstname, surname, email, password, confirmPassword} = credentials;
+  const {firstname, surname, email, password, confirmPassword, error, message} = credentials;
 
 
   const handleSubmit = async event => {
@@ -67,7 +73,15 @@ export default function CreateAccount() {
         }
       })
 
-      .catch(err => console.log(err))
+      .catch(err => {console.log(err)
+        if (err.code === "UsernameExistsException") {
+          console.log("username exists")
+          setCredentials({...credentials, "message": {
+            severity: "warning",
+            info: "account already exists"
+          }})
+        }
+      })
   };
 
   const handleOnChange = event => {
@@ -79,7 +93,8 @@ export default function CreateAccount() {
   return (
     <Paper className={classes.paper}>
     <Typography variant='h5' component='h2'>Register</Typography>
-    <form className={classes.form} noValidate autoComplete="off"
+    <Alert severity={message.severity}>{message.info}</Alert>
+    <form className={classes.form}  
       onSubmit={handleSubmit}
     > 
         <TextField 
@@ -93,7 +108,6 @@ export default function CreateAccount() {
         />
         <TextField 
           className={classes.text}
-            required 
             id="surname" 
             name='surname' 
             label='surname'

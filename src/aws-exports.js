@@ -20,14 +20,16 @@ const awsmobile = {
     "oauth": {
         "domain": "double3e9a859a-3e9a859a-amplify.auth.ap-southeast-2.amazoncognito.com",
         "scope": [
-            "phone",
             "email",
             "openid",
             "profile",
-            "aws.cognito.signin.user.admin"
+            "aws.cognito.signin.user.admin",
         ],
-        "redirectSignIn": "http://localhost:3000/,http://localhost:3000/,http://localhost:3000/",
+
+        "redirectSignIn": "http://localhost:3000/",
         "redirectSignOut": "http://localhost:3000/",
+        // "redirectSignIn": "https://double3e9a859a-3e9a859a-amplify.auth.ap-southeast-2.amazoncognito.com/oauth2/idpresponse",
+        // "redirectSignOut": "https://double3e9a859a-3e9a859a-amplify.auth.ap-southeast-2.amazoncognito.com/oauth2/idpresponse",
         "responseType": "code"
     },
     "federationTarget": "COGNITO_USER_POOLS"

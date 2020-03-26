@@ -108,12 +108,12 @@ export default function Login() {
           />
           <Box className = {classes.buttonbox}>
             <Button className = {classes.button} type= "submit">Submit</Button>
-            <Link className={classes.button} to="/create-account">
-              <Button className = {classes.button}>Create Account</Button>
-            </Link>
+            <Button className = {classes.button} onClick={() => Auth.federatedSignIn({provider: 'Xero'})}>Xero Login</Button>
           </Box>
-          
       </form>
+      <Link className={classes.button} to="/create-account">
+        <Button className = {classes.button}>Create Account</Button>
+      </Link>
     </Paper>
   );
 }

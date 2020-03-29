@@ -116,6 +116,33 @@
 				}
 			}
 		},
+		"apixeroConnection": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/amplify-double-amplify-80617-deployment/amplify-cfn-templates/api/xeroConnection-cloudformation-template.json",
+				"Parameters": {
+					"authRoleName": {
+						"Ref": "AuthRoleName"
+					},
+					"unauthRoleName": {
+						"Ref": "UnauthRoleName"
+					},
+					"functionxeroName": {
+						"Fn::GetAtt": [
+							"functionxero",
+							"Outputs.Name"
+						]
+					},
+					"functionxeroArn": {
+						"Fn::GetAtt": [
+							"functionxero",
+							"Outputs.Arn"
+						]
+					},
+					"env": "amplify"
+				}
+			}
+		},
 		"authdouble3e9a859a": {
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
@@ -169,7 +196,7 @@
 					"userPoolGroups": true,
 					"adminQueries": true,
 					"triggers": "{}",
-					"oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/\",\"http://localhost:3000/\",\"http://localhost:3000/\"],\"LogoutURLs\":[\"http://localhost:3000/\"]}",
+					"oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://double3e9a859a-3e9a859a-amplify.auth.ap-southeast-2.amazoncognito.com/oauth2/idpresponse\"],\"LogoutURLs\":[\"http://localhost:3000/\"]}",
 					"adminQueryGroup": "admin",
 					"parentStack": {
 						"Ref": "AWS::StackId"
@@ -229,6 +256,21 @@
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
 				"TemplateURL": "https://s3.amazonaws.com/amplify-double-amplify-80617-deployment/amplify-cfn-templates/function/AdminQueriesb0bd2d34-cloudformation-template.json",
+				"Parameters": {
+					"authdouble3e9a859aUserPoolId": {
+						"Fn::GetAtt": [
+							"authdouble3e9a859a",
+							"Outputs.UserPoolId"
+						]
+					},
+					"env": "amplify"
+				}
+			}
+		},
+		"functionxero": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/amplify-double-amplify-80617-deployment/amplify-cfn-templates/function/xero-cloudformation-template.json",
 				"Parameters": {
 					"authdouble3e9a859aUserPoolId": {
 						"Fn::GetAtt": [

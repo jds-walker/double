@@ -7,6 +7,7 @@ import Navbar from './components/navbar/Navbar'
 import Login from './components/login/Login'
 import Verify from './components/verify/Verify'
 import CreateAccount from './components/create-account/CreateAccount'
+import Profile from './components/profile/Profile'
 
 import { Hub } from 'aws-amplify';
 import './App.css';
@@ -31,6 +32,7 @@ function App() {
       })
       .then(data => {
         setUser(data)
+        
       })
       .catch(err => console.log(err));
 
@@ -42,6 +44,7 @@ function App() {
     })
     .then(data => {
       setUser(data)
+      console.log(data)
     })
     .catch(err => {
       console.log(err)
@@ -66,6 +69,9 @@ function App() {
             </Route>
             <Route path="/verify">
               <Verify/>
+            </Route>
+            <Route path="/profile">
+              <Profile/>
             </Route>
           </Switch>
         </Container>

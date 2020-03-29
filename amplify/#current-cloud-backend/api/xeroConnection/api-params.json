@@ -1,0 +1,41 @@
+{
+    "paths": [
+        {
+            "name": "/xero",
+            "lambdaFunction": "xero",
+            "privacy": {
+                "private": true,
+                "auth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH",
+                    "/DELETE"
+                ]
+            }
+        }
+    ],
+    "resourceName": "xeroConnection",
+    "apiName": "xeroConnection",
+    "functionArns": [
+        {
+            "lambdaFunction": "xero"
+        }
+    ],
+    "privacy": {
+        "auth": 1,
+        "unauth": 0,
+        "authRoleName": "amplify-double-amplify-80617-authRole",
+        "unAuthRoleName": "amplify-double-amplify-80617-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "xero",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}

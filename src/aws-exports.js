@@ -11,6 +11,11 @@ const awsmobile = {
             "name": "AdminQueries",
             "endpoint": "https://x8h50rssb4.execute-api.ap-southeast-2.amazonaws.com/amplify",
             "region": "ap-southeast-2"
+        },
+        {
+            "name": "xeroConnection",
+            "endpoint": "https://0u1b0ht1ri.execute-api.ap-southeast-2.amazonaws.com/amplify",
+            "region": "ap-southeast-2"
         }
     ],
     "aws_cognito_identity_pool_id": "ap-southeast-2:7c632198-d856-435b-8506-27944f53901a",
@@ -20,16 +25,14 @@ const awsmobile = {
     "oauth": {
         "domain": "double3e9a859a-3e9a859a-amplify.auth.ap-southeast-2.amazoncognito.com",
         "scope": [
+            "phone",
             "email",
             "openid",
             "profile",
-            "aws.cognito.signin.user.admin",
+            "aws.cognito.signin.user.admin"
         ],
-
-        "redirectSignIn": "http://localhost:3000/",
+        "redirectSignIn": "https://double3e9a859a-3e9a859a-amplify.auth.ap-southeast-2.amazoncognito.com/oauth2/idpresponse",
         "redirectSignOut": "http://localhost:3000/",
-        // "redirectSignIn": "https://double3e9a859a-3e9a859a-amplify.auth.ap-southeast-2.amazoncognito.com/oauth2/idpresponse",
-        // "redirectSignOut": "https://double3e9a859a-3e9a859a-amplify.auth.ap-southeast-2.amazoncognito.com/oauth2/idpresponse",
         "responseType": "code"
     },
     "federationTarget": "COGNITO_USER_POOLS"

@@ -1,0 +1,9 @@
+{
+    "permissions": {
+        "auth": {
+            "double3e9a859a": [
+                "read"
+            ]
+        }
+    }
+}

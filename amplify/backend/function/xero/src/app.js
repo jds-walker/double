@@ -18,11 +18,68 @@ Amplify Params - DO NOT EDIT */
 var express = require('express')
 var bodyParser = require('body-parser')
 var awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
+var AWS = require('aws-sdk')
 
 // declare a new express app
 var app = express()
 app.use(bodyParser.json())
 app.use(awsServerlessExpressMiddleware.eventContext())
+
+// get region
+// Load the AWS SDK
+var AWS = require('aws-sdk'),
+    region = process.env.REGION,
+    secretName = "Xero-Double",
+    secret,
+    decodedBinarySecret;
+
+
+// Create a Secrets Manager client
+var client = new AWS.SecretsManager({
+    region: region
+});
+
+  // Get secret
+client.getSecretValue({SecretId: secretName}, function(err, data) {
+    if (err) {
+        console.log("error: " + err)
+        if (err.code === 'DecryptionFailureException')
+            // Secrets Manager can't decrypt the protected secret text using the provided KMS key.
+            // Deal with the exception here, and/or rethrow at your discretion.
+            
+            throw err;
+        else if (err.code === 'InternalServiceErrorException')
+            // An error occurred on the server side.
+            // Deal with the exception here, and/or rethrow at your discretion.
+            throw err;
+        else if (err.code === 'InvalidParameterException')
+            // You provided an invalid value for a parameter.
+            // Deal with the exception here, and/or rethrow at your discretion.
+            throw err;
+        else if (err.code === 'InvalidRequestException')
+            // You provided a parameter value that is not valid for the current state of the resource.
+            // Deal with the exception here, and/or rethrow at your discretion.
+            throw err;
+        else if (err.code === 'ResourceNotFoundException')
+            // We can't find the resource that you asked for.
+            // Deal with the exception here, and/or rethrow at your discretion.
+            throw err;
+    }
+    else {
+        // Decrypts secret using the associated KMS CMK.
+        // Depending on whether the secret is a string or binary, one of these fields will be populated.
+        console.log("data: "  + data);
+        if ('SecretString' in data) {
+            secret = data.SecretString;
+        } else {
+            let buff = new Buffer(data.SecretBinary, 'base64');
+            decodedBinarySecret = buff.toString('ascii');
+        }
+    }
+})
+  
+
+
 
 // Enable CORS for all methods
 app.use(function(req, res, next) {
@@ -38,12 +95,14 @@ app.use(function(req, res, next) {
 
 app.get('/xero', function(req, res) {
   // Add your code here
-  res.json({success: 'get call succeed!', url: req.url});
+res.json({success: "get call succeed!", url: req.url});
+  
 });
 
 app.get('/xero/*', function(req, res) {
   // Add your code here
-  res.json({success: 'get call succeed!', url: req.url});
+res.json({success: 'get call succeed!', url: req.url});
+  
 });
 
 /****************************

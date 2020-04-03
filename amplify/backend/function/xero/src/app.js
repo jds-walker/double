@@ -19,6 +19,7 @@ var express = require('express')
 var bodyParser = require('body-parser')
 var awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
 var AWS = require('aws-sdk')
+const  xero_node = require('xero-node')
 
 // declare a new express app
 var app = express()
@@ -68,7 +69,6 @@ client.getSecretValue({SecretId: secretName}, function(err, data) {
     else {
         // Decrypts secret using the associated KMS CMK.
         // Depending on whether the secret is a string or binary, one of these fields will be populated.
-        console.log("data: "  + data);
         if ('SecretString' in data) {
             secret = data.SecretString;
         } else {
@@ -78,8 +78,19 @@ client.getSecretValue({SecretId: secretName}, function(err, data) {
     }
 })
   
+// Xero Parameters
+const client_id = '089B2465BE3340AFBCBE7B7B68ED7E67'
+const client_secret = secret
+const referral_id = 'x30double'
+const redirectUri = 'http://localhost:3000/'
+const scopes = 'openid profile email accounting.transactions accounting.settings offline_access'
 
-
+const xero = new xero_node.XeroClient({
+  clientId: client_id,
+  clientSecret: client_secret,
+  redirectUris: [redirectUri],
+  scopes: scopes.split(" ")
+});
 
 // Enable CORS for all methods
 app.use(function(req, res, next) {
@@ -93,10 +104,16 @@ app.use(function(req, res, next) {
  * Example get method *
  **********************/
 
-app.get('/xero', function(req, res) {
+app.get('/xero', async function(req, res) {
   // Add your code here
-res.json({success: "get call succeed!", url: req.url});
-  
+  // res.json({success: 'get call succeed!', url: req.url});
+  try {
+    let consentUrl = await xero.buildConsentUrl();
+    // res.json({success: "consent URL: " + consentUrl})	  
+    res.get(consentUrl);
+  } catch (err) {
+    res.json({erorr: "Sorry, something went wrong"});
+  }
 });
 
 app.get('/xero/*', function(req, res) {
@@ -111,7 +128,10 @@ res.json({success: 'get call succeed!', url: req.url});
 
 app.post('/xero', function(req, res) {
   // Add your code here
-  res.json({success: 'post call succeed!', url: req.url, body: req.body})
+  res.redirect({statusCode: 301, headers: {
+    Location: 'https://google.com'
+  }})
+  // res.json({success: 'post call succeed!', url: req.url, body: req.body})
 });
 
 app.post('/xero/*', function(req, res) {

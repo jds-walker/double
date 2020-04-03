@@ -70,7 +70,7 @@
 				"Timeout": "25",
 				"Code": {
 					"S3Bucket": "amplify-double-amplify-80617-deployment",
-					"S3Key": "amplify-builds/xero-33314c6f77662b565674-build.zip"
+					"S3Key": "amplify-builds/xero-2f71384e6f6e62745a6b-build.zip"
 				}
 			}
 		},

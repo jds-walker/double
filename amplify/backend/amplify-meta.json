@@ -35,7 +35,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/amplify-double-amplify-80617-deployment/amplify-cfn-templates/api/cloudformation-template.json",
 				"logicalId": "apiamplifyDatasource"
 			},
-			"lastPushTimeStamp": "2020-03-29T06:32:59.226Z",
+			"lastPushTimeStamp": "2020-03-29T23:05:27.273Z",
 			"lastPushDirHash": "ijpG9jA/6wGRX3EwUxuczNpvs70="
 		},
 		"AdminQueries": {
@@ -62,7 +62,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/amplify-double-amplify-80617-deployment/amplify-cfn-templates/api/admin-queries-cloudformation-template.json",
 				"logicalId": "apiAdminQueries"
 			},
-			"lastPushTimeStamp": "2020-03-29T06:32:59.228Z",
+			"lastPushTimeStamp": "2020-03-29T23:05:27.277Z",
 			"output": {
 				"ApiName": "AdminQueries",
 				"RootUrl": "https://x8h50rssb4.execute-api.ap-southeast-2.amazonaws.com/amplify"
@@ -86,7 +86,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/amplify-double-amplify-80617-deployment/amplify-cfn-templates/api/xeroConnection-cloudformation-template.json",
 				"logicalId": "apixeroConnection"
 			},
-			"lastPushTimeStamp": "2020-03-29T06:32:59.229Z",
+			"lastPushTimeStamp": "2020-03-29T23:05:27.278Z",
 			"output": {
 				"ApiName": "xeroConnection",
 				"RootUrl": "https://0u1b0ht1ri.execute-api.ap-southeast-2.amazonaws.com/amplify"
@@ -103,7 +103,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/amplify-double-amplify-80617-deployment/amplify-cfn-templates/auth/double3e9a859a-cloudformation-template.yml",
 				"logicalId": "authdouble3e9a859a"
 			},
-			"lastPushTimeStamp": "2020-03-29T06:32:59.230Z",
+			"lastPushTimeStamp": "2020-03-29T23:05:27.279Z",
 			"output": {
 				"AppClientSecret": "n9lteuhfp3f2a145ncittg87nv1napeqd0ncdc5naggab5h29us",
 				"UserPoolId": "ap-southeast-2_Ck3Zisg0i",
@@ -137,7 +137,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/amplify-double-amplify-80617-deployment/amplify-cfn-templates/auth/template.json",
 				"logicalId": "authuserPoolGroups"
 			},
-			"lastPushTimeStamp": "2020-03-29T06:32:59.231Z",
+			"lastPushTimeStamp": "2020-03-29T23:05:27.281Z",
 			"output": {
 				"adminGroupRole": "arn:aws:iam::821377504967:role/ap-southeast-2_Ck3Zisg0i-adminGroupRole"
 			},
@@ -165,7 +165,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/amplify-double-amplify-80617-deployment/amplify-cfn-templates/function/AdminQueriesb0bd2d34-cloudformation-template.json",
 				"logicalId": "functionAdminQueriesb0bd2d34"
 			},
-			"lastPushTimeStamp": "2020-03-29T06:32:59.232Z",
+			"lastPushTimeStamp": "2020-03-29T23:05:27.284Z",
 			"output": {
 				"Region": "ap-southeast-2",
 				"Arn": "arn:aws:lambda:ap-southeast-2:821377504967:function:AdminQueriesb0bd2d34-amplify",
@@ -187,21 +187,21 @@
 					]
 				}
 			],
-			"lastBuildTimeStamp": "2020-03-29T00:58:35.325Z",
-			"lastPackageTimeStamp": "2020-03-29T06:31:55.501Z",
-			"distZipFilename": "xero-33314c6f77662b565674-build.zip",
+			"lastBuildTimeStamp": "2020-03-29T10:52:48.656Z",
+			"lastPackageTimeStamp": "2020-03-29T23:04:16.913Z",
+			"distZipFilename": "xero-2f71384e6f6e62745a6b-build.zip",
 			"providerMetadata": {
 				"s3TemplateURL": "https://s3.amazonaws.com/amplify-double-amplify-80617-deployment/amplify-cfn-templates/function/xero-cloudformation-template.json",
 				"logicalId": "functionxero"
 			},
-			"lastPushTimeStamp": "2020-03-29T06:32:59.235Z",
+			"lastPushTimeStamp": "2020-03-29T23:05:27.291Z",
 			"output": {
 				"Region": "ap-southeast-2",
 				"Arn": "arn:aws:lambda:ap-southeast-2:821377504967:function:xero-amplify",
 				"Name": "xero-amplify",
 				"LambdaExecutionRole": "doubleLambdaRoleeaeb8cbe-amplify"
 			},
-			"lastPushDirHash": "xpTy/r2EZsRxBGR0f651UVOtO0o="
+			"lastPushDirHash": "SvJLfdGPIBpli/S6EYmb2lozWOQ="
 		}
 	}
 }
